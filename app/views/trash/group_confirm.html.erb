@@ -1,0 +1,32 @@
+<div class="group-confirm">
+
+<div class="group-confirm-one">
+<h1>グループ確認</h1>
+</div>
+
+<div class="group-confirm-logo">
+
+<%= image_tag '/logo/812990.png' ,class:'group-confirm-triangle' %>
+
+<div class="group-confirm-name">
+<%= @current_user.name[0..-3] %>
+</div>
+
+</div>
+
+<div class="group-confirm-select">
+
+<%= link_to "/rooms/:room_id/group_cancel", {method: "post"}  do %>
+<div class="group-confirm-cancel">キャンセル
+</div>
+<% end %>
+
+<%= link_to "/rooms/:room_id/meeting" do %>
+<div class="group-confirm-ok">OK
+</div>
+<% end %>
+</div>
+
+</div>
+
+</div>

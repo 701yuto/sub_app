@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  room_id: 1
+  number_of_members: 1
+  number_of_players: 1
+  order: 1
+  user1: 1
+  user2: 1
+  user3: 1
+  user4: 1
+
+two:
+  room_id: 1
+  number_of_members: 1
+  number_of_players: 1
+  order: 1
+  user1: 1
+  user2: 1
+  user3: 1
+  user4: 1

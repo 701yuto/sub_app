@@ -1,0 +1,120 @@
+<div class="select">
+
+<div class="initial">
+
+<div class="flash">
+</div>
+
+<div class="select-one">
+<h1>セレクト画面</h1>
+</div>
+
+<div class="select-member">
+<%= "第#{@room.order}巡選択希望メンバー" %>
+</div>
+
+<%= form_tag("/rooms/#{session[:room_id]}/decide")  do %>
+<select id="select" name="select"  size=5 class="select-members">
+
+  <option disabled>-----乃木坂46-----</option>
+  <% @nogi_members = Member.where(team:"乃木坂46") %>
+
+  <% @nogi_members.each do |member| %>
+    <% if @draft_now = Draft.find_by(member_name: member.name,room_id:session[:room_id])%>
+    <% @user_now = User.find_by(id: @draft_now.user_id) %>
+    <option disabled><%= "#{member.name}:#{@user_now.name}" %></option>
+    <% else %>
+    <option><%= member.name %></option>
+    <% end%>
+  <% end%>
+
+  <option disabled>-----欅坂46-----</option>
+  <% @keyaki_members = Member.where(team:"欅坂46") %>
+
+  <% @keyaki_members.each do |member| %>
+    <% if @draft_now = Draft.find_by(member_name: member.name,room_id:session[:room_id])%>
+    <% @user_now = User.find_by(id: @draft_now.user_id) %>
+    <option disabled><%= "#{member.name}:#{@user_now.name}" %></option>
+    <% else %>
+    <option><%= member.name %></option>
+    <% end%>
+  <% end%>
+
+  <option disabled>-----日向坂46-----</option>
+  <% @hinata_members = Member.where(team:"日向坂46") %>
+
+  <% @hinata_members.each do |member| %>
+    <% if @draft_now = Draft.find_by(member_name: member.name,room_id:session[:room_id])%>
+    <% @user_now = User.find_by(id: @draft_now.user_id) %>
+    <option disabled><%= "#{member.name}:#{@user_now.name}" %></option>
+    <% else %>
+    <option><%= member.name %></option>
+    <% end%>
+  <% end%>
+
+
+</select>
+
+
+<div class="select-p">メモ</div>
+
+<textarea name="memo" class="memo">
+<%= @current_user.memo %>
+</textarea>
+
+<div class="select-submit">選択</div>
+
+<script>
+ $('.select-submit').click(function(){
+   var select = $('.select-members').val();
+   if(select){
+     $('.select-confirm-member').text(select);
+   }else{
+    $('.flash').text("メンバーを選択してください");
+    $('.flash').show().delay(1000).fadeOut('slow');
+    return;
+   }
+
+   $('.select-confirm').delay().fadeIn();
+   $('.background,.initial').delay().addClass('black');
+  });
+</script>
+
+</div>
+</div>
+
+
+
+<div class="select-confirm">
+
+<div class="select-confirm-one">
+<h1>セレクト確認</h1>
+</div>
+
+<div class="select-confirm-name">
+<%= @current_user.name %>
+</div>
+
+<div class="select-confirm-order">
+<%= "第#{@room.order}巡選択希望メンバー" %>
+</div>
+
+<div class="select-confirm-member">
+</div>
+
+<div class="select-confirm-select">
+<div class="select-confirm-cancel">キャンセル</div>
+<script>
+ $('.select-confirm-cancel').click(function(){
+   $('.select-confirm').fadeOut();
+   $('.background,.initial').removeClass('black');
+   $('.select-confirm-member').text("");
+  });
+</script>
+
+<input type="submit" value="OK" class="select-confirm-ok">
+<% end %>
+
+</div>
+
+</div>

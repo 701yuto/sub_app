@@ -1,0 +1,31 @@
+
+<div class="page">
+
+<div class="page">
+
+<div class="rule">
+<h1>ルール設定</h1>
+</div>
+
+<div class="form">
+<%= form_tag("/users/create_confirm") do %>
+  
+<div class="players">
+  <p>プレーヤー数：</p>
+  <%= select_tag 'number_of_players', options_for_select(["2", "3", "4"]),class:'player'%>
+</div>
+
+<div class="members">
+  <p>　メンバー数：</p>
+  <%= select_tag 'number_of_members',
+   options_for_select(["2", "3", "4", "5","6","7","8","9","10","11","12", "13", "14", "15","16","17","18","19","20","21"]),class:'member'%>
+   <br>
+</div>
+
+  <%= submit_tag "作成" ,class:'submit'%>
+<% end %>
+</div>
+
+</div>
+
+</div>

@@ -1,0 +1,12 @@
+<h1>ルーム入室</h1>
+
+<% if flash[:notice] %>
+<%=  flash[:notice] %>
+<% end %>
+
+<%= form_tag("/users/enter") do %>
+  <p>ルームID</p>
+  <input name="room_id">
+  <br>
+  <input type="submit" value="入室">
+<% end %>

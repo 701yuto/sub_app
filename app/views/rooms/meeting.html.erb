@@ -1,0 +1,39 @@
+
+<div class="meeting">
+
+
+<%= image_tag '/under-construction.png' ,class:'meeting-img1' %>
+
+<div class="under-construction">
+<%= "#{@current_user.name[0..-3]}会議中" %>
+</div>
+
+<%= image_tag '/under-construction.png' ,class:'meeting-img2' %>
+
+
+<div class="meeting-nogi">
+<a href="https://www.nogizaka46.com/member/" target="_blank">乃木坂46メンバー</a>
+</div>
+
+<div class="meeting-keyaki">
+<a href="https://www.keyakizaka46.com/s/k46o/search/artist" target="_blank">欅坂46メンバー　</a>
+</div>
+
+<div class="meeting-hinata">
+<a href="https://www.hinatazaka46.com/s/official/search/artist?ima=0000&link=ROBO004" target="_blank">日向坂46メンバー</a>
+</div>
+
+
+<%= form_tag("/rooms/#{session[:room_id]}/select") do %>
+
+<div class="meeting-p">メモ</div>
+
+<textarea name="memo" class="memo">
+<%= @current_user.memo %>
+</textarea>
+
+<input type="submit" value="選択へ" class="meeting-submit" >
+
+<% end %>
+
+</div>

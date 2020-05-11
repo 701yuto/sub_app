@@ -1,0 +1,81 @@
+
+<div class="matching">
+
+
+<div class="matching-two">
+<h2>ルームID</h2>
+</div>
+
+<div class="matching">
+<%= @room.room_id %>
+</div>
+
+<div class="matching-three">
+<h3>-ルール-</h3>
+</div>
+
+<div class="room-rule">
+<%= "プレーヤー数:　#{@room.number_of_players}人"%><br>
+<%= "メンバー数:　#{@room.number_of_members}人" %>
+</div>
+
+
+<div class="matching-four">
+<h4>マッチング中．．．</h4>
+</div>
+
+<%= image_tag '/logo/947d17.png' ,class:'rotation' %>
+
+<div id="ajaxreload">
+<% @users = User.where(room_id: session[:room_id]) %>
+<div class="now-member">
+<%= "#{@users.length}人" %>
+</div>
+</div>
+
+<div class="number-of-members">
+<%= "/#{@room.number_of_players}人"%>
+</div>
+
+<script>
+window.addEventListener('load',function(){
+  setInterval('location.reload()',3000);
+});
+// function dojQueryAjax() {
+//     $.ajax({
+//         type: "get",
+//         url: "matching.html.erb", 
+//         date: "html"
+//         cache: false, 
+//         success: function (data) {
+//             $('#ajaxreload').html(data);
+//         },
+//         error: function () {
+//             // alert("通信エラー");
+//         }
+//     });
+// }
+// window.addEventListener('load', function () {
+//     setInterval(dojQueryAjax, 3000);
+// });
+</script>
+
+
+<% if @current_user.id == @room.user1 %>
+<div class="cancel">
+<%= link_to "/users/delete", {method: "post"}  do %>
+<i class="fas fa-times"></i> ルーム削除
+<% end %>
+</div>
+
+<% else %>
+<div class="cancel">
+<%= link_to "/users/cancel", {method: "post"}  do %>
+<i class="fas fa-times"></i> キャンセル
+</div>
+<% end %>
+
+<% end %>
+
+
+</div>

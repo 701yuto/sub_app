@@ -1,0 +1,29 @@
+<h1>競合抽選</h1>
+<% @user = User.find_by(lottery:0) %>
+<%= @user.select %>
+
+<% if @current_user.lottery == 0 %>
+<p>当たりだよ</p>
+
+<% elsif @current_user.lottery == 2 %>
+<p>外れだよ</p>
+
+<% else %>
+<% @users = User.where(room_id: session[:room_id]).where(lottery = 2).or(User.where(room_id: session[:room_id]).where(lottery = 0))%>
+
+  <% @users.each do |user| %>
+    <%= user.name %>
+    <% if user.lottery == 0 %>
+      当たり
+    <% else %>
+      外れ
+    <% end %>
+  <% end %>
+
+<% end %>
+
+<% elsif @current_user.select %>
+<%= link_to  "選択へ", "/rooms/#{session[:room_id]}/lottery_result_second" ,{method: "post"} %>
+<% else %>
+<%= link_to  "選択を待つ", "/rooms/#{session[:room_id]}/second_wait",{method: "post"}  %>
+<% end %>

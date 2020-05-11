@@ -1,0 +1,33 @@
+<div class="wait">
+
+<div class="wait-one">
+<%= "第#{@room.order}巡選択希望メンバー" %>
+</div>
+
+
+<% @users = User.where(room_id:session[:room_id]).where(lottery:1).or(User.where(room_id:session[:room_id]).where(lottery:3))%>
+<% @users.each do |user|%>
+<div class="wait-member">
+
+<div class="wait-name">
+<%= "#{user.name}："%>
+</div>
+<% if user.select %>
+<div class="wait-select">選択済</div>
+<% else %>
+<div class="wait-selectnow">選択中</div>
+<% end %>
+</div>
+<% end %>
+
+
+<div class="wait-column">コラム</div>
+<div class="wait-please">しばらくお待ちください</div>
+
+<script>
+window.addEventListener('load',function(){
+  setInterval('location.reload()',3000);
+});
+</script>
+
+</div>

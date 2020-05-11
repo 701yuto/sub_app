@@ -1,0 +1,85 @@
+<div class="wait">
+
+<div class="wait-one">
+<%= "第#{@room.order}巡選択希望メンバー" %>
+</div>
+
+<div class="wait-member">
+<div class="wait-name">
+<% if @user1.name %>
+<%= "#{@user1.name}：" %>
+<% else %>
+名称未設定：
+<% end %>
+</div>
+<% if @user1.select %>
+<div class="wait-select">選択済</div>
+<% else %>
+<div class="wait-selectnow">選択中</div>
+<% end %>
+
+</div>
+
+<div class="wait-member">
+<div class="wait-name">
+<% if @user2.name %>
+<%= "#{@user2.name}：" %>
+<% else %>
+名称未設定：
+<% end %>
+</div>
+<% if @user2.select %>
+<div class="wait-select">選択済</div>
+<% else %>
+
+<div class="wait-selectnow">選択中</div>
+<% end %>
+</div>
+
+
+<% if @room.number_of_players >= 3 %>
+<div class="wait-member">
+<div class="wait-name">
+<% if @user3.name %>
+<%= "#{@user3.name}：" %>
+<% else %>
+名称未設定：
+<% end %>
+</div>
+<% if @user3.select %>
+<div class="wait-select">選択済</div>
+<% else %>
+
+<div class="wait-selectnow">選択中</div>
+<% end %>
+</div>
+<% end %>
+
+
+<% if @room.number_of_players >= 4 %>
+<div class="wait-member">
+<div class="wait-name">
+<% if @user4.name %>
+<%= "#{@user4.name}：" %>
+<% else %>
+名称未設定：
+<% end %>
+</div>
+<% if @user4.select %>
+<div class="wait-select">選択済</div>
+<% else %>
+
+<div class="wait-selectnow">選択中</div>
+<% end %>
+</div>
+<% end %>
+
+</div>
+
+<script>
+window.addEventListener('load',function(){
+  setInterval('location.reload()',3000);
+});
+</script>
+
+

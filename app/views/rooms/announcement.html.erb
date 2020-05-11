@@ -1,0 +1,272 @@
+<% if User.find_by(room_id:session[:room_id],lottery:1) %>
+<div class="announcement-space">
+<%= "第#{@room.order}巡選択希望メンバー" %>
+</div>
+<% else %>
+<div class="announcement-space">
+<%= "第#{@room.order-1}巡選択希望メンバー" %>
+</div>
+<% end %>
+
+<div class="announcement-skip">
+<%= link_to  "スキップ", "/rooms/#{session[:room_id]}/branch" %>
+</div>
+
+<div class="announcement-start">
+<div class="announcement-start-p">START</div>
+</div>
+
+
+<%# ---------------------JS CSS--------------------- %>
+
+<style>
+.announcement-one .announcement-name,
+.announcement-two .announcement-name-small{
+  color: <%=@user1.color%>;
+}
+.announcement-three .announcement-name,
+.announcement-four .announcement-name-small{
+  color: <%=@user2.color%>;
+}
+</style>
+
+<% if @room.number_of_players == 2 %>
+<script>
+  function preparation(){
+   window.location.href = '/rooms/<%=session[:room_id]%>/branch';
+}
+ $('.announcement-start-p').click(function(){
+  $('.announcement-start').fadeOut(1000);
+  $('.announcement-one').delay(0).fadeIn(1000).delay(1000).fadeOut(1000);
+  $('.announcement-two').delay(2000).fadeIn(1000).delay(2000).fadeOut(1000);
+  $('.announcement-three').delay(5000).fadeIn(1000).delay(1000).fadeOut(1000);
+  $('.announcement-four').delay(7000).fadeIn(1000).delay(2000).fadeOut(1000);
+  setTimeout("preparation()", 10000);
+  });
+</script>
+<% end %>
+
+
+<% if @room.number_of_players == 3 %>
+<style>
+.announcement-five .announcement-name,
+.announcement-six .announcement-name-small{
+  color: <%=@user3.color%>;
+}
+</style>
+<script>
+  function preparation(){
+   window.location.href = '/rooms/<%=session[:room_id]%>/branch';
+}
+ $('.announcement-start-p').click(function(){
+  $('.announcement-start').fadeOut(1000);
+  $('.announcement-one').delay(0).fadeIn(1000).delay(1000).fadeOut(1000);
+  $('.announcement-two').delay(2000).fadeIn(1000).delay(2000).fadeOut(1000);
+  $('.announcement-three').delay(5000).fadeIn(1000).delay(1000).fadeOut(1000);
+  $('.announcement-four').delay(7000).fadeIn(1000).delay(2000).fadeOut(1000);
+  $('.announcement-five').delay(10000).fadeIn(1000).delay(1000).fadeOut(1000);
+  $('.announcement-six').delay(12000).fadeIn(1000).delay(2000).fadeOut(1000);
+  setTimeout("preparation()", 15000);
+  });
+</script>
+<% end %>
+
+
+<% if @room.number_of_players == 4 %>
+<style>
+.announcement-five .announcement-name,
+.announcement-six .announcement-name-small{
+  color: <%=@user3.color%>;
+}
+.announcement-seven .announcement-name,
+.announcement-eight .announcement-name-small{
+  color: <%=@user4.color%>;
+}
+</style>
+<script>
+  function preparation(){
+   window.location.href = '/rooms/<%=session[:room_id]%>/branch';
+}
+ $('.announcement-start-p').click(function(){
+  $('.announcement-start').fadeOut(1000);
+  $('.announcement-one').delay(0).fadeIn(1000).delay(1000).fadeOut(1000);
+  $('.announcement-two').delay(2000).fadeIn(1000).delay(2000).fadeOut(1000);
+  $('.announcement-three').delay(5000).fadeIn(1000).delay(1000).fadeOut(1000);
+  $('.announcement-four').delay(7000).fadeIn(1000).delay(2000).fadeOut(1000);
+  $('.announcement-five').delay(10000).fadeIn(1000).delay(1000).fadeOut(1000);
+  $('.announcement-six').delay(12000).fadeIn(1000).delay(2000).fadeOut(1000);
+  $('.announcement-seven').delay(15000).fadeIn(1000).delay(1000).fadeOut(1000);
+  $('.announcement-eight').delay(17000).fadeIn(1000).delay(2000).fadeOut(1000);
+  setTimeout("preparation()", 20000);
+  });
+</script>
+<% end %>
+
+
+<% @user_winning1 = User.find_by(room_id:session[:room_id],lottery:2) %>
+<% @user_winning2 = User.find_by(room_id:session[:room_id],lottery:4) %>
+
+<div class="announcement">
+
+<%# ---------------------1--------------------- %>
+
+<div class="announcement-background announcement-one">
+<%= image_tag @user1.logo ,class:'announcement-logo' %>
+<div class="announcement-name">
+<%= @user1.name[0..-3] %>
+</div>
+</div>
+
+<div class="announcement-background announcement-two">
+
+<div class="announcement-group-small">
+<%= image_tag @user1.logo ,class:'announcement-logo-small' %>
+<div class="announcement-name-small">
+<%= @user1.name %>
+</div>
+</div>
+
+<div class="announcement-member">
+<% if @user1.lottery == 1 %>
+<%= @user_winning1.select %>
+<% @member1 = Member.find_by(name:@user_winning1.select)%>
+<% elsif @user1.lottery == 3 %>
+<%= @user_winning2.select %>
+<% @member1 = Member.find_by(name:@user_winning2.select)%>
+<% else %>
+<%= @user1.select %>
+<% @member1 = Member.find_by(name:@user1.select)%>
+<% end %>
+</div>
+
+<div class="announcement-name-team">
+<%= @member1.team %>
+</div>
+
+</div>
+
+
+<%# ---------------------2--------------------- %>
+
+
+<div class="announcement-background announcement-three">
+<%= image_tag @user2.logo ,class:'announcement-logo' %>
+<div class="announcement-name">
+<%= @user2.name[0..-3] %>
+</div>
+</div>
+
+<div class="announcement-background announcement-four">
+
+<div class="announcement-group-small">
+<%= image_tag @user2.logo ,class:'announcement-logo-small' %>
+<div class="announcement-name-small">
+<%= @user2.name %>
+</div>
+</div>
+
+<div class="announcement-member">
+<% if @user2.lottery == 1 %>
+<%= @user_winning1.select %>
+<% @member2 = Member.find_by(name:@user_winning1.select)%>
+<% elsif @user2.lottery == 3 %>
+<%= @user_winning2.select %>
+<% @member2 = Member.find_by(name:@user_winning2.select)%>
+<% else %>
+<%= @user2.select %>
+<% @member2 = Member.find_by(name:@user2.select)%>
+<% end %>
+</div>
+
+<div class="announcement-name-team">
+<%= @member2.team %>
+</div>
+
+</div>
+
+<%# ---------------------3--------------------- %>
+
+<% if @room.number_of_players >= 3 %>
+
+<div class="announcement-background announcement-five">
+<%= image_tag @user3.logo ,class:'announcement-logo' %>
+<div class="announcement-name">
+<%= @user3.name[0..-3] %>
+</div>
+</div>
+
+
+<div class="announcement-background announcement-six">
+
+<div class="announcement-group-small">
+<%= image_tag @user3.logo ,class:'announcement-logo-small' %>
+<div class="announcement-name-small">
+<%= @user3.name %>
+</div>
+</div>
+
+<div class="announcement-member">
+<% if @user3.lottery == 1 %>
+<%= @user_winning1.select %>
+<% @member3 = Member.find_by(name:@user_winning1.select)%>
+<% elsif @user3.lottery == 3 %>
+<%= @user_winning2.select %>
+<% @member3 = Member.find_by(name:@user_winning2.select)%>
+<% else %>
+<%= @user3.select %>
+<% @member3 = Member.find_by(name:@user3.select)%>
+<% end %>
+</div>
+
+<div class="announcement-name-team">
+<%= @member3.team %>
+</div>
+
+</div>
+<% end %>
+
+<%# ---------------------4--------------------- %>
+
+<% if @room.number_of_players >= 4 %>
+
+<div class="announcement-background announcement-seven">
+<%= image_tag @user4.logo ,class:'announcement-logo' %>
+<div class="announcement-name">
+<%= @user4.name[0..-3] %>
+</div>
+</div>
+
+
+<div class="announcement-background  announcement-eight">
+
+<div class="announcement-group-small">
+<%= image_tag @user4.logo ,class:'announcement-logo-small' %>
+<div class="announcement-name-small">
+<%= @user4.name %>
+</div>
+</div>
+
+<div class="announcement-member">
+<% if @user4.lottery == 1 %>
+<%= @user_winning1.select %>
+<% @member4 = Member.find_by(name:@user_winning1.select)%>
+<% elsif @user4.lottery == 3 %>
+<%= @user_winning2.select %>
+<% @member4 = Member.find_by(name:@user_winning2.select)%>
+<% else %>
+<%= @user4.select %>
+<% @member4 = Member.find_by(name:@user4.select)%>
+<% end %>
+</div>
+
+<div class="announcement-name-team">
+<%= @member4.team %>
+</div>
+
+</div>
+<% end %>
+
+<%# ---------------------0--------------------- %>
+
+</div>
+

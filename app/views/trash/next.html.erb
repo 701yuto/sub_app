@@ -1,0 +1,21 @@
+<%=  %>
+
+<%= @user1.name %>
+<br>
+<% @drafts1.each do |draft| %>
+<%= draft.member_name %>
+<br>
+<% end %>
+<%= @user1.select %>
+<br>
+
+<% if (@room.order - 1) == @room.number_of_members %>
+<%= link_to  "フォーメーション設定へ", "rooms/#{session[:room_id]}/formation" %>
+<% else %>
+<%= form_tag("/rooms/#{session[:room_id]}/select") do %>
+<p>メモ</p>
+<textarea name="memo"></textarea>
+<br>
+<input type="submit" value= "<%= "第#{@room.order}巡選択へ" %>" >
+<% end %>
+<% end %>

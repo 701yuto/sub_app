@@ -1,0 +1,44 @@
+
+<script type="text/javascript">
+window.addEventListener('beforeunload', function(e) {
+    e.returnValue = 'ページをから離れると、\nデータが失われゲームが続行できなくなる可能性があります。';
+}, false);
+</script>
+
+# def captain
+#   reset_session
+# end
+
+# def new
+#   reset_session
+# end
+
+# def create_confirm
+#   if Room.find_by(room_id: session[:room_id])
+#     @room = Room.find_by(room_id: session[:room_id])
+#   else
+    
+#   end
+# end
+
+# def create_cancel
+#   @room = Room.find_by(room_id: session[:room_id])
+#   @room.destroy
+#   reset_session
+#   redirect_to("/users/captain")
+# end
+
+<div class="page">
+
+<div class="confirm">設定確認</div>
+
+<%= "プレーヤー数:#{@room.number_of_players}人"%>
+<br>
+<%= "メンバー数:#{@room.number_of_members}人"%>
+
+<br>
+<%= link_to  "OK", "/users/create", {method: "post"}  %>
+<%= link_to  "キャンセル", "/users/create_cancel", {method: "post"} %>
+
+</div>
+

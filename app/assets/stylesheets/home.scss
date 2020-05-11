@@ -1,0 +1,198 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+/* --------------------------------------top-------------------------------------- */
+/* --------------------------------------top-------------------------------------- */
+/* --------------------------------------top-------------------------------------- */
+
+
+.top{
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.logo{
+  width:90%;
+  margin: 30px 5% -10px;
+}
+
+.create,
+.enter{
+  background-color: white;
+  color: #333;
+  font-size: 40px;
+  font-weight: bold;
+  height: 60px;
+  line-height: 60px;
+  width: 240px;
+  margin: 0px auto  20px;
+  text-align: center;
+  border: double 10px #947d17;
+}
+
+
+/* --------------------------------------top-------------------------------------- */
+
+/* --------------------------------------create-------------------------------------- */
+
+.black{
+  filter: brightness(50%);
+  pointer-events: none;
+}
+
+.create-form{
+  width: 90%;
+  height: 360px;
+  background-color: white;
+  border-radius: 40px;
+  box-sizing:  border-box;
+  border: double 10px #333 ;
+  
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  
+  margin: 0 5%;  
+  position: absolute;
+  z-index: 10;
+  top: 120px;
+
+  display: none;
+}
+
+
+.cross{
+  color: red;
+  text-align: right;
+  font-size: 2.5em;
+  margin: 5px 12px 0 0;
+}
+
+.rule{
+  font-size: 20px;
+  margin: 0;
+  text-align: center;
+  margin: 0 auto;
+}
+
+h1{
+  margin: 0;
+}
+
+.form{
+  display: flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.players,
+.members{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+}
+
+.players p,
+.members p{
+  font-size: 20px;
+  font-weight: bold;
+  text-align: right;
+  height: 20px;
+  line-height: 70px;
+  margin: 0 20px 0 auto;
+}
+
+.player,
+.member{
+  font-size: 24px;
+  font-weight: bold;
+  width: 60px;
+  height: 50px;
+  margin: 10px 20% 10px 0px;
+}
+
+.submit{
+background-color: white;
+font-size: 44px;
+font-weight: 900;
+height: 60px;
+line-height: 44px;
+width: 120px;
+margin: 10px auto;
+border: double 5px #947d17 ;
+}
+
+
+/* --------------------------------------create-------------------------------------- */
+
+/* --------------------------------------enter-------------------------------------- */
+
+.enter-form{
+  width: 90%;
+  height: 340px;
+  background-color: white;
+  border-radius: 40px;
+  box-sizing:  border-box;
+  border: double 10px #333 ;
+  
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  
+  margin: 0 5%;  
+  position: absolute;
+  z-index: 10;
+  top: 120px;
+
+  display: none;
+}
+
+.room-enter{
+  font-size: 20px;
+  margin: 0;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.enter-input1{
+  font-size: 28px;
+  height: 40px;
+  line-height: 40px;
+
+  margin: 10px auto 5px;
+}
+
+.enter-input2{
+  font-size: 40px;
+  text-align: center;
+  height: 50px;
+  width: 160px;
+  margin: auto 50px 10px;
+  border: solid 5px #333 ;
+}
+
+/* --------------------------------------enter-------------------------------------- */
+
+.flash{
+  background-color: red;
+  color: white;
+  text-align: center;
+  width: 100%;
+  font-size: 20px;
+  margin: auto;
+
+  position: absolute;
+  z-index: 5;
+  top: 20px;
+}
+
+/*
+ --------------------------------------PC-------------------------------------- */
+/* --------------------------------------PC-------------------------------------- */
+/* --------------------------------------PC-------------------------------------- */
+
+
+

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>坂道ドラフト</title>
+    <link rel="icon" href="/947d17.ico">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+    <%# <script type="text/javascript" src="ajax.js?ver=1.0"></script> %>
+  </head>
+
+  <body>
+    
+   <div class="body">
+
+   <div class="background">
+   </div>
+   <div class="content">
+    <%= yield %>
+   </div>
+   
+   </div>
+
+  </body>
+
+  <footer>
+
+    <%= link_to  "トップへ", "/" ,class:"footer"%>
+
+
+    <% if @current_user %>
+    <%= @current_user.id %>
+    
+    <% if @current_user.name %>
+    <%= @current_user.name %>
+    <% end %>
+
+    <% if @current_user.select %>
+    <%= @current_user.select %>
+    <% end %>
+ 
+    <% if @current_user.lottery %>
+    <%= @current_user.lottery %>
+    <% end %>
+    <% end %>
+
+    <% if @room = Room.find_by(room_id: session[:room_id]) %>
+    <%= "next#{@room.next}" %>
+    <% end %>
+
+  </footer>
+
+</html>

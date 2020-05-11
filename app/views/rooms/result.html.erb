@@ -1,0 +1,81 @@
+<div class="result">
+
+<div class="result-one">
+<%= "第#{@room.order-1}巡選択希望メンバー" %>
+</div>
+
+<style>
+.result-user1{
+  color: <%=@user1.color%>;
+}
+.result-user2{
+  color: <%=@user2.color%>;
+}
+</style>
+
+<div class="result-user">
+<div class="result-name result-user1">
+<%= "#{@user1.name}：" %>
+</div>
+<div class="result-member">
+<%= @user1.select %>
+</div>
+</div>
+
+
+<div class="result-user">
+<div class="result-name result-user2">
+<%= "#{@user2.name}：" %>
+</div>
+<div class="result-member">
+<%= @user2.select %>
+</div>
+</div>
+
+<% if @room.number_of_players >= 3 %>
+
+<style>
+.result-user3{
+  color: <%=@user3.color%>;
+}
+</style>
+
+<div class="result-user">
+<div class="result-name result-user3">
+<%= "#{@user3.name}：" %>
+</div>
+<div class="result-member">
+<%= @user3.select %>
+</div>
+</div>
+<% end %>
+
+<% if @room.number_of_players >= 4 %>
+
+<style>
+.result-user4{
+  color: <%=@user4.color%>;
+}
+</style>
+
+<div class="result-user">
+<div class="result-name result-user4">
+<%= "#{@user4.name}：" %>
+</div>
+<div class="result-member">
+<%= @user4.select %>
+</div>
+</div>
+<% end %>
+
+<% if (@room.order - 1) == @room.number_of_members %>
+<div class="result-formation">
+<%= link_to  "フォーメーション設定へ", "/rooms/#{session[:room_id]}/formation" %>
+</div>
+<% else %>
+<div class="result-chapter">
+<%= link_to  "途中経過へ" , "/rooms/#{session[:room_id]}/chapter" %>
+</div>
+<% end %>
+
+</div>

@@ -1,0 +1,226 @@
+// Place all the styles related to the drafts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@font-face{
+  font-family: 'dejima';
+  src: font-url('dejima-mincho-r227.ttf') format('truetype');
+}
+
+.preparation{
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center; 
+
+.preparation-one{
+  font-size: 32px;
+  font-weight: bold;
+  padding-top: 50px;
+  margin-bottom: 20px;
+}
+
+.preparation-user{
+  background-color: white;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: row;
+  text-align: center; 
+  font-size: 24px;
+  width: 340px;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 5px;
+  margin: 10px auto;
+}
+
+.preparation-name{
+  width: 180px;
+  text-align: right;
+  margin-left: 5px ;
+}
+
+.preparation-member-one,
+.preparation-member-two,
+.preparation-member-three,
+.preparation-member-four{
+  font-size: 26px;
+  font-weight: bold;
+  text-align: left;
+  margin-right:5px;
+}
+
+.preparation-start{
+  background-color: white;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 0px 10px;
+
+  height: 50px;
+  line-height: 50px;
+  margin: 10px auto;
+  border: double 5px #947d17;
+  border-radius: 5px;
+}
+
+}
+
+//----------------------------------------------------------------------
+
+.lottery{
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center; 
+  margin: 0 auto;
+
+  display: none;
+  
+.lottery-one{
+  font-size: 32px;
+  font-weight: bold;
+  padding-top: 50px;
+}
+
+.lottery-member{
+  background-color: white;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 0px 10px;
+
+  width: 180px;
+  height: 50px;
+  line-height: 50px;
+  margin: 0px auto 20px;
+  border: double 5px #947d17;
+  border-radius: 5px;
+
+}
+
+.lottery-paper{
+  background-color: white;
+  width: 240px;
+  height: 300px;
+  margin: auto;
+  border: solid 2px #333333;
+
+  .lottery-paper-logos{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .lottery-paper-logo{
+    width:70%;
+    margin: 40px auto 0;
+  }
+  .lottery-paper-name{
+    font-size: 34px;
+    text-align: right;
+    margin-right: 35px;
+    font-family: 'dejima';
+  }
+
+}
+
+.lottery-result{
+  font-size: 80px;
+  line-height: 300px;
+  font-weight: bold;
+  font-family:serif;
+
+  display: none;
+}
+
+
+
+
+.lottery-watching{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .lottery-paper{
+    width: 110px;
+    height: 180px;
+    margin: 20px 5px ;
+    position: relative;
+  }
+    
+  .lottery-paper-logos{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .lottery-watching-logo{
+    width:70%;
+    margin: 40px auto 0;
+  }
+  .lottery-watching-name{
+    font-size: 16px;
+    text-align: right;
+    margin-right: 15px;
+    font-family: 'dejima';
+  }
+
+  .lottery-result-name{
+    font-size: 14px;
+    position: absolute;
+    top: 2px;
+    left: 5px;
+
+    display: none;
+  }
+
+  .lottery-result{
+    font-size: 40px;
+    line-height: 180px;
+  }
+
+}
+
+.lottery-turn{
+  background-color: white;
+  font-size: 32px;
+  width: 180px;
+  padding: 0px 10px;
+  margin: 10px auto;
+  border: solid 3px #999999;
+}
+
+.rotationY{
+  animation: 2s linear rotationY;
+}
+  
+@keyframes rotationY{
+  0%{ transform:rotateY(0);}
+  100%{ transform:rotateY(180deg);}
+}
+
+.rotationY2{
+animation: 1s linear rotationY2;
+}
+
+@keyframes rotationY2{
+  0%{transform:rotateY(90deg);}
+  100%{transform:rotateY(180deg);}
+}
+
+.lottery-link{
+  background-color: white;
+  width: 180px;
+  font-size: 32px;
+  padding: 0px 10px;
+  margin: 10px auto;
+  border: solid 3px #999999;
+
+  display: none;
+}
+
+}
+
+//----------------------------------------------------------------------
+
+
+
+
+

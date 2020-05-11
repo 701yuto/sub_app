@@ -1,0 +1,143 @@
+<% if User.find_by(room_id:session[:room_id],lottery:1) %>
+<div class="announcement-space">
+<%= "第#{@room.order}巡選択希望メンバー" %>
+</div>
+<% else %>
+<div class="announcement-space">
+<%= "第#{@room.order-1}巡選択希望メンバー" %>
+</div>
+<% end %>
+
+<div class="announcement-skip">
+<%= link_to  "スキップ", "/drafts/#{session[:room_id]}/branch" %>
+</div>
+
+<div class="announcement-start">
+<div class="announcement-start-p">START</div>
+</div>
+
+<% @users = User.where(room_id: session[:room_id]).where(lottery:0).or(User.where(room_id: session[:room_id]).where(lottery:1)).or(User.where(room_id: session[:room_id]).where(lottery:2)).order(:created_at) %>
+
+<%# ---------------------JS CSS--------------------- %>
+
+<% if @users.length == 1 %>
+
+<script>
+  function second_preparation(){
+   window.location.href = '/drafts/<%=session[:room_id]%>/branch';
+}
+ $('.announcement-start-p').click(function(){
+  $('.announcement-number:eq(0) > .announcement-name').css('color','<%=@users[0].color%>');
+  $('.announcement-number:eq(1) > .announcement-group-small > .announcement-name-small').css('color','<%=@users[0].color%>');
+
+  $('.announcement-start').fadeOut(1000);
+  $('.announcement-number').eq(0).delay(0).fadeIn(1000).delay(1000).fadeOut(1000);
+  $('.announcement-number').eq(1).delay(2000).fadeIn(1000).delay(2000).fadeOut(1000);
+  setTimeout("second_preparation()", 5000);
+  });
+</script>
+<% end %>
+
+
+<% if @users.length == 2 %>
+
+<script>
+  function second_preparation(){
+   window.location.href = '/drafts/<%=session[:room_id]%>/branch';
+}
+ $('.announcement-start-p').click(function(){
+  $('.announcement-number:eq(0) > .announcement-name').css('color','<%=@users[0].color%>');
+  $('.announcement-number:eq(1) > .announcement-group-small > .announcement-name-small').css('color','<%=@users[0].color%>');
+  $('.announcement-number:eq(2) > .announcement-name').css('color','<%=@users[1].color%>');
+  $('.announcement-number:eq(3) > .announcement-group-small > .announcement-name-small').css('color','<%=@users[1].color%>');
+
+  $('.announcement-start').fadeOut(1000);
+  $('.announcement-number').eq(0).delay(0).fadeIn(1000).delay(1000).fadeOut(1000);
+  $('.announcement-number').eq(1).delay(2000).fadeIn(1000).delay(2000).fadeOut(1000);
+  $('.announcement-number').eq(2).delay(5000).fadeIn(1000).delay(1000).fadeOut(1000);
+  $('.announcement-number').eq(3).delay(7000).fadeIn(1000).delay(2000).fadeOut(1000);
+  setTimeout("second_preparation()", 10000);
+  });
+</script>
+<% end %>
+
+
+<% if @users.length == 3 %>
+
+<script>
+  function second_preparation(){
+   window.location.href = '/drafts/<%=session[:room_id]%>/branch';
+}
+ $('.announcement-start-p').click(function(){
+  $('.announcement-number:eq(0) > .announcement-name').css('color','<%=@users[0].color%>');
+  $('.announcement-number:eq(1) > .announcement-group-small > .announcement-name-small').css('color','<%=@users[0].color%>');
+  $('.announcement-number:eq(2) > .announcement-name').css('color','<%=@users[1].color%>');
+  $('.announcement-number:eq(3) > .announcement-group-small > .announcement-name-small').css('color','<%=@users[1].color%>');
+  $('.announcement-number:eq(4) > .announcement-name').css('color','<%=@users[2].color%>');
+  $('.announcement-number:eq(5) > .announcement-group-small > .announcement-name-small').css('color','<%=@users[2].color%>');
+
+  $('.announcement-start').fadeOut(1000);
+  $('.announcement-number').eq(0).delay(0).fadeIn(1000).delay(1000).fadeOut(1000);
+  $('.announcement-number').eq(1).delay(2000).fadeIn(1000).delay(2000).fadeOut(1000);
+  $('.announcement-number').eq(2).delay(5000).fadeIn(1000).delay(1000).fadeOut(1000);
+  $('.announcement-number').eq(3).delay(7000).fadeIn(1000).delay(2000).fadeOut(1000);
+  $('.announcement-number').eq(4).delay(10000).fadeIn(1000).delay(1000).fadeOut(1000);
+  $('.announcement-number').eq(5).delay(12000).fadeIn(1000).delay(2000).fadeOut(1000);
+  setTimeout("second_preparation()", 15000);
+  });
+</script>
+<% end %>
+
+
+
+<div class="announcement">
+
+<%# ---------------------1--------------------- %>
+
+<% @user_winning1 = User.find_by(room_id:session[:room_id],lottery:2) %>
+
+<% @users.each_with_index do |user,i| %>
+
+<div class="announcement-background announcement-number">
+<%= image_tag user.logo ,class:'announcement-logo' %>
+<div class='announcement-name'>
+<%= user.name[0..-3] %>
+</div>
+</div>
+
+<div class="announcement-background announcement-number">
+
+<div class="announcement-group-small">
+<%= image_tag user.logo ,class:'announcement-logo-small' %>
+<div class="announcement-name-small">
+<%= user.name %>
+
+</div>
+</div>
+
+<% if user.lottery == 1 %>
+<div class="announcement-member">
+<%= @user_winning1.select %>
+</div>
+<% @member = Member.find_by(name: @user_winning1.select) %>
+<% else %>
+<div class="announcement-member">
+<%= user.select %>
+</div>
+<% @member = Member.find_by(name: user.select) %>
+<% end %>
+
+<div class="announcement-name-team">
+<%= @member.team %>
+</div>
+
+</div>
+
+<% end %>
+
+<%# ---------------------0--------------------- %>
+
+
+</div>
+
+

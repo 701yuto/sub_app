@@ -1,0 +1,206 @@
+<div class="group">
+
+<div class="initial">
+
+<div class="group-one">
+<h1>グループ設定</h1>
+</div>
+
+<div class="flash">
+<% if flash[:notice] %>
+<%= flash[:notice] %>
+<script>
+window.onload = function(){
+      $('.flash').delay(1000).fadeOut('slow');
+    }
+</script>
+<% end %>
+</div>
+
+<%= form_tag("/rooms/#{session[:room_id]}/group_confirm") do %>
+
+  <div class="group-two">グループ名</div>
+  <div class="name-form">
+  <input name="name" placeholder="４字以下" class="name-input">
+  <div class="group-three">坂46</div>
+  </div>
+
+  <div class="group-two">グループロゴ</div>
+  
+  <div class="group-logos">
+  
+  <%# 紫 %>
+  <div class="group-logo">
+  <%= image_tag '/logo/812990.png', id:'812990', class:'group-logo-size' %>
+  </div>
+
+  <%# 青 %>
+  <div class="group-logo">
+  <%= image_tag '/logo/192f60.png', id:'192f60' ,class:'group-logo-size' %>
+  </div>
+
+  <%# 水色 %>
+  <div class="group-logo">
+  <%= image_tag '/logo/7cc8e9.png', id:'7cc8e9' ,class:'group-logo-size' %>
+  </div>
+
+  <%# ターコイズ %>
+  <div class="group-logo">
+  <%= image_tag '/logo/009b9f.png' , id:'009b9f' ,class:'group-logo-size' %>
+  </div>
+
+  <%# 緑 %>
+  <div class="group-logo">
+  <%= image_tag '/logo/00552e.png' , id:'00552e' ,class:'group-logo-size' %>
+  </div>
+
+  <%# 黄緑 %>
+  <div class="group-logo">
+  <%= image_tag '/logo/5eb954.png'  , id:'5EB954' ,class:'group-logo-size' %>
+  </div>
+
+  <%# 黄色 %>
+  <div class="group-logo">
+  <%= image_tag '/logo/ffdc28.png' , id:'ffdc28',class:'group-logo-size' %>
+  </div>
+
+  <%# オレンジ %>
+  <div class="group-logo">
+  <%= image_tag '/logo/ee7800.png' , id:'ee7800' ,class:'group-logo-size' %>
+  </div>
+
+  <%# ピンク %>
+  <div class="group-logo">
+  <%= image_tag '/logo/eb6ea0.png', id:'eb6ea0' ,class:'group-logo-size' %>
+  </div>
+
+  <%# 赤 %>
+  <div class="group-logo">
+  <%= image_tag '/logo/e60033.png', id:'e60033',class:'group-logo-size' %>
+  </div>
+
+  <%# 黒 %>
+  <div class="group-logo">
+  <%= image_tag '/logo/333333.png' , id:'333333' ,class:'group-logo-size' %>
+  </div>
+  
+  <%# 白 %>
+  <div class="group-logo">
+  <%= image_tag '/logo/ffffff.png' , id:'ffffff' ,class:'group-logo-size' %>
+  </div>
+
+  <%# 金 %>
+  <div class="group-logo">
+  <%= image_tag '/logo/947d17.png' , id:'947d17' ,class:'group-logo-size' %>
+  </div>
+
+  <%# 銀 %>
+  <div class="group-logo">
+  <%= image_tag '/logo/c0c0c0.png' , id:'c0c0c0' ,class:'group-logo-size' %>
+  </div>
+  
+  <%# 銅 %>
+  <div class="group-logo">
+  <%= image_tag '/logo/b87333.png' , id:'b87333' ,class:'group-logo-size' %>
+  </div>
+
+
+<% if @current_user.color %>
+<script>
+window.addEventListener('load',function(){
+  $('.group-logos > .group-logo').addClass('group-logo-nonselect');
+  $('#<%=@current_user.color[1..7]%>').parent().addClass('group-logo-select');
+});
+</script>
+<% else %>
+<script>
+  window.addEventListener('load',function(){
+    $('.group-logos > .group-logo').addClass('group-logo-nonselect');
+  });
+</script>
+<% end %>
+
+<script>
+ $('.group-logo').click(function(){
+   $('.group-logos > .group-logo').removeClass('group-logo-select');
+  $(this).addClass('group-logo-select');
+  });
+</script>
+
+</div>
+
+<div class="group-submit">決定</div>
+
+</div>
+
+</div>
+
+<script>
+ $('.group-submit').click(function(){
+
+   var name = $('.name-input').val();
+
+   if(name){
+     if(name.length <= 4){
+        $('.group-confirm-name').text(`${name}坂`);
+     }else{
+        $('.name-input').val("");
+        $('.flash').text("４文字以下で入力してください");
+        $('.flash').show().delay(1000).fadeOut('slow');
+        return;
+      }
+    }else{
+        $('.flash').text("グループ名を入力してください");
+        $('.flash').show().delay(1000).fadeOut('slow');
+        return;
+    }
+   
+
+   var color = $('.group-logo-select > .group-logo-size').attr('id');
+
+   if(color){
+     $('.group-confirm-triangle').attr('src',`/logo/${color}.png`);
+     $('.color-input').val(`#${color}`);
+
+     if(color == 'ffffff'){
+        $('.group-confirm-name').css('color','#333333');
+     }else{
+       $('.group-confirm-name').css('color',`#${color}`);
+     }
+
+   }else{
+     $('.flash').text("グループロゴを選択してください");
+     $('.flash').show().delay(1000).fadeOut('slow');
+      return;
+   }
+  
+   $('.background,.initial').delay().addClass('black');
+   $('.group-confirm').delay().fadeIn();
+
+  });
+</script>
+
+<input name="color" class="color-input">
+
+<div class="group-confirm">
+
+<div class="group-confirm-logo">
+<img src="/logo/812990.png", class="group-confirm-triangle">
+<div class="group-confirm-name">
+</div>
+</div>
+
+<div class="group-confirm-select">
+<div class="group-confirm-cancel">キャンセル</div>
+<input type="submit" value="OK" class="group-confirm-ok">
+<% end %>
+</div>
+
+<script>
+ $('.group-confirm-cancel').click(function(){
+   $('.background,.initial').removeClass('black');
+   $('.group-confirm').fadeOut();
+  });
+</script>
+
+</div>

@@ -1,0 +1,11 @@
+<h1>セレクト確認</h1>
+
+<%= "第#{@room.order}巡選択希望メンバー" %>
+<br>
+<%= @current_user.name %>
+<br>
+<%= @current_user.select_beta %>
+
+<br>
+<%= link_to  "OK", "/drafts/:room_id/second_decide",{method: "post"} %>
+<%= link_to  "キャンセル", "/drafts/:room_id/second_select_cancel", {method: "post"} %>

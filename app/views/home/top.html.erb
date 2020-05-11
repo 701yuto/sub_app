@@ -1,0 +1,106 @@
+
+
+<div class="top">
+
+<div class="initial">
+
+<%= image_tag '/logo-original.png' ,class:'logo' %>
+
+
+<div class="create">部屋を作る</div>
+
+<script>
+ $('.create').click(function(){
+   $('.create-form').fadeIn();
+   $('.background,.initial').addClass('black');
+  });
+</script>
+
+<div class="enter">入室する</div>
+
+<script>
+ $('.enter').click(function(){
+   $('.enter-form').fadeIn();
+   $('.background,.initial').addClass('black');
+  });
+</script>
+
+</div>
+
+<div class="create-form">
+
+<div class="cross">
+<i class="fas fa-times-circle"></i>
+</div>
+
+<script>
+ $('.cross').click(function() {
+      $('.create-form').fadeOut();
+      $('.background,.initial').removeClass('black');
+      });
+</script>
+
+<div class="rule">
+<h1>ルール設定</h1>
+</div>
+
+<div class="form">
+<%= form_tag("/users/create") do %>
+  
+<div class="players">
+  <p>プレーヤー数：</p>
+  <%= select_tag 'number_of_players', options_for_select(["2", "3", "4"]),class:'player'%>
+</div>
+
+<div class="members">
+  <p>　メンバー数：</p>
+  <%= select_tag 'number_of_members',
+   options_for_select(["2", "3", "4", "5","6","7","8","9","10","11","12", "13", "14", "15","16","17","18","19","20","21"]),class:'member'%>
+   <br>
+</div>
+
+<%= submit_tag "作成" ,class:'submit'%>
+<% end %>
+
+</div>
+</div>
+
+<div class="enter-form">
+
+<div class="cross">
+<i class="fas fa-times-circle"></i>
+</div>
+
+<script>
+ $('.cross').click(function() {
+      $('.enter-form').fadeOut();
+      $('.background,.initial').removeClass('black');
+      });
+</script>
+
+<div class="room-enter">
+<h1>ルーム入室</h1>
+</div>
+
+<%= form_tag("/users/enter") do %>
+  <div class="enter-input1">ルームID</div>
+  <input name="room_id" class="enter-input2">
+  <input type="submit" value="入室" class="submit">
+<% end %>
+
+</div>
+
+<div class="flash">
+<% if flash[:notice] %>
+<%= flash[:notice] %>
+<script>
+window.onload = function(){
+      $('.flash').delay(1000).fadeOut('slow');
+    }
+</script>
+<% end %>
+</div>
+
+
+
+</div>

@@ -1,0 +1,159 @@
+
+<div class="chapter">
+
+<div class="chapter-one">途中経過</div>
+
+<style>
+.chapter-name-one{
+  color: <%=@user1.color%>;
+}
+.chapter-name-two{
+  color: <%=@user2.color%>;
+}
+</style>
+
+
+<div class="chapter-users">
+
+<%# --------------------1-------------------- %>
+
+<div class="chapter-user">
+
+<div class="chapter-name chapter-name-one">
+<%= @user1.name %>
+</div>
+
+<% @draft1s = Draft.where(user_id:@user1.id) %>
+<% @draft1s.each_with_index do |draft1,i| %>
+
+<div class="chapter-member">
+<%= "#{i+1}:#{draft1.member_name}" %>
+</div>
+
+<% end %>
+</div>
+
+<%# --------------------2-------------------- %>
+
+<div class="chapter-user">
+
+<div class="chapter-name chapter-name-two">
+<%= @user2.name %>
+</div>
+
+<% @draft2s = Draft.where(user_id:@user2.id).order(order: :asc) %>
+<% @draft2s.each_with_index do |draft2,i| %>
+
+<div class="chapter-member">
+<%= "#{i+1}:#{draft2.member_name}" %>
+</div>
+
+<% end %>
+</div>
+
+<%# --------------------3-------------------- %>
+
+<% if @room.number_of_players >= 3 %>
+
+<style>
+.chapter-name-three{
+  color: <%=@user3.color%>;
+}
+</style>
+
+<div class="chapter-user">
+
+<div class="chapter-name chapter-name-three">
+<%= @user3.name %>
+</div>
+
+<% @draft3s = Draft.where(user_id:@user3.id).order(order: :asc) %>
+<% @draft3s.each_with_index do |draft3,i| %>
+
+<div class="chapter-member">
+<%= "#{i+1}:#{draft3.member_name}" %>
+</div>
+
+<% end %>
+
+</div>
+
+<% end %>
+
+
+
+<%# --------------------4-------------------- %>
+
+<% if @room.number_of_players >= 4 %>
+
+<style>
+.chapter-name-four{
+  color: <%=@user3.color%>;
+}
+</style>
+
+<div class="chapter-user">
+
+<div class="chapter-name chapter-name-four">
+<%= @user4.name %>
+</div>
+
+<% @draft4s = Draft.where(user_id:@user4.id).order(order: :asc) %>
+<% @draft4s.each_with_index do |draft4,i| %>
+
+<div class="chapter-member">
+<%= "#{i+1}:#{draft4.member_name}" %>
+</div>
+
+<% end %>
+</div>
+
+<% end %>
+
+<%# --------------------0-------------------- %>
+
+</div>
+
+
+
+<% if @draft1s.length <= 10 %>
+<style>
+.chapter .memo{
+  height: 160px;
+}
+.chapter .chapter-member{
+  font-size: 12px;
+}
+</style>
+<% elsif @draft1s.length <= 15 %>
+<style>
+.chapter .memo{
+  height: 140px;
+}
+.chapter-member{
+  font-size: 10px;
+}
+</style>
+<% else %>
+<style>
+.chapter .memo{
+  height: 100px;
+}
+.chapter-member{
+  font-size: 8px;
+}
+</style>
+<% end %>
+
+
+
+<%= form_tag("/rooms/#{session[:room_id]}/next") do %>
+<div class="chapter-p">メモ</div>
+<textarea name="memo" class="memo">
+<%= @current_user.memo %>
+</textarea>
+<br>
+<input type="submit" value= "<%= "第#{@room.order}巡選択へ" %>" class="chapter-submit">
+<% end %>
+
+</div>

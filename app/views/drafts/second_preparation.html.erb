@@ -1,0 +1,202 @@
+
+<div class="preparation">
+
+<% @user_winning1 = User.find_by(room_id:session[:room_id],lottery:2) %>
+<% @users = User.where(room_id: session[:room_id]).where(lottery:0).or(User.where(room_id: session[:room_id]).where(lottery:1)).or(User.where(room_id: session[:room_id]).where(lottery:2)).order(:created_at) %>
+
+<div class="preparation-one">
+<%= "第#{@room.order}巡選択希望メンバー" %>
+</div>
+
+<%# ----------------------------------1---------------------------------- %>
+
+<div class="preparation-user preparation-user1">
+<div class="preparation-name">
+<%= "#{@users[0].name}：" %>
+</div>
+
+<% if @users[0].lottery == 1 || @users[0].lottery == 2 %>
+<div class="preparation-member-one"><%= @user_winning1.select %></div>
+<style>.preparation-user1{border: solid 3px #D71D3B;}</style>
+<% else %>
+<div class="preparation-member-one"><%= @users[0].select %></div>
+<style>.preparation-user1{border: solid 1px #333333;}</style>
+<% end %>
+
+</div>
+
+<%# ----------------------------------2---------------------------------- %>
+
+<% if @users.length >= 2 %>
+
+<div class="preparation-user preparation-user2">
+<div class="preparation-name">
+<%= "#{@users[1].name}：" %>
+</div>
+
+<% if @users[1].lottery == 1 || @users[1].lottery == 2 %>
+<div class="preparation-member-two"><%= @user_winning1.select %></div>
+<style>.preparation-user2{border: solid 3px #D71D3B;}</style>
+<% else %>
+<div class="preparation-member-two"><%= @users[1].select %></div>
+<style>.preparation-user2{border: solid 1px #333333;}</style>
+<% end %>
+
+</div>
+<% end %>
+
+<%# ----------------------------------3---------------------------------- %>
+
+<% if @users.length >= 3 %>
+
+<div class="preparation-user preparation-user3">
+<div class="preparation-name">
+<%= "#{@users[2].name}：" %>
+</div>
+
+<% if @users[2].lottery == 1 || @users[2].lottery == 2 %>
+<div class="preparation-member-three"><%= @user_winning1.select %></div>
+<style>.preparation-user3{border: solid 3px #D71D3B;}</style>
+<% else %>
+<div class="preparation-member-three"><%= @users[2].select %></div>
+<style>.preparation-user3{border: solid 1px #333333;}</style>
+<% end %>
+
+</div>
+<% end %>
+
+
+<%# ----------------------------------4---------------------------------- %>
+
+<div class="preparation-start">
+<%= "#{@user_winning1.select} 抽選開始" %>
+</div>
+
+<script>
+ $('.preparation-start').click(function(){
+  $('.preparation').fadeOut(500);
+  $('.lottery').fadeIn(500);
+  });
+</script>
+
+</div>
+
+
+<%# ----------------------------------lottery---------------------------------- %>
+
+<div class="lottery">
+
+<div class="lottery-one">競合抽選</div>
+
+<div class="lottery-member"><%= @user_winning1.select %></div>
+
+
+<% if @current_user.lottery == 2 %>
+<style>
+.lottery-paper .lottery-paper-logos .lottery-paper-name{
+color: <%=@current_user.color%>
+}
+</style>
+
+<div class="lottery-paper">
+<div class="lottery-paper-logos">
+<%= image_tag @current_user.logo ,class:'lottery-paper-logo'%>
+<div class="lottery-paper-name">
+<%= @current_user.name[0..-3] %>
+</div>
+</div>
+<div class="lottery-result">獲得</div>
+</div>
+
+<% elsif @current_user.lottery == 1 %>
+<style>
+.lottery-paper .lottery-paper-logos .lottery-paper-name{
+color: <%=@current_user.color%>
+}
+</style>
+
+<div class="lottery-paper">
+<div class="lottery-paper-logos">
+<%= image_tag @current_user.logo ,class:'lottery-paper-logo'%>
+<div class="lottery-paper-name">
+<%= @current_user.name[0..-3] %>
+</div>
+</div>
+<div class="lottery-result">外れ</div>
+</div>
+
+<% else %>
+
+<% @watching_users = User.where(room_id: session[:room_id]).where(lottery:1).or(User.where(room_id: session[:room_id]).where(lottery:2)).order(:created_at)%>
+
+<div class="lottery-watching">
+
+  <% @watching_users.each do |user| %>
+
+      <div class="lottery-paper">
+      <div class="lottery-paper-logos">
+      <%= image_tag user.logo ,class:'lottery-watching-logo'%>
+      <div class="lottery-watching-name">
+      <%= user.name[0..-3] %>
+      </div>
+      </div>
+      
+      <% if user.lottery == 2 %>
+      <div class="lottery-result">獲得</div>
+      <% elsif user.lottery == 1 %>
+      <div class="lottery-result">外れ</div>
+      <% end %>
+      <div class="lottery-result-name"><%= user.name %></div>
+
+      </div>
+      
+  <% end %>
+
+</div>
+
+<style>
+.lottery-paper:nth-child(1)  .lottery-paper-logos .lottery-watching-name{
+color: <%=@users[0].color%>
+}
+.lottery-paper:nth-child(2)  .lottery-paper-logos .lottery-watching-name{
+color: <%=@users[1].color%>
+}
+<% if @users.length == 3%>
+.lottery-paper:nth-child(3)  .lottery-paper-logos .lottery-watching-name{
+color: <%=@users[2].color%>
+}
+<% end %>
+</style>
+
+
+<% end %>
+
+
+<div class="lottery-turn">結果を見る</div>
+
+<script>
+ $('.lottery-turn').click(function(){
+  $('.lottery-paper').addClass('rotationY');
+    $('.lottery-paper-logos').delay(900).fadeOut(100);
+  $('.lottery-result').delay(1000).queue(function() {
+    $(this).show().addClass('rotationY2'); 
+  });
+  $(this).fadeOut();
+  $('.lottery-link').delay(2000).fadeIn();
+  });
+</script>
+
+<div class="lottery-link">
+<% if @current_user.select %>
+<%= link_to  "選択を待つ", "/drafts/#{session[:room_id]}/second_to_wait" ,{method: "post"} %>
+<% else %>
+<%= link_to  "選択へ", "/drafts/#{session[:room_id]}/second_select" ,{method: "post"} %>
+<% end %>
+</div>
+
+
+</div>
+
+
+
+
